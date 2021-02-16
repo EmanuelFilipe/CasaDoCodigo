@@ -60,7 +60,7 @@ textarea {
 }
 
 .img-produto-carrossel {
-    width: 100%;
+    width: 100% !important;
 }
 
 .img-produto-carrinho {
