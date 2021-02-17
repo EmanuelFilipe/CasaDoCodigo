@@ -35,7 +35,9 @@ namespace CasaDoCodigo
             //AddTransient = instância temporária
             services.AddTransient<IDataService, DataService>();
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
-
+            services.AddTransient<ICadastroRepository, CadastroRepository>();
+            services.AddTransient<IPedidoRepository, PedidoRepository>();
+            services.AddTransient<IItemPedidoRepository, ItemPedidoRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,10 +64,10 @@ namespace CasaDoCodigo
             });
 
             // cria o banco de dados caso não esteja criado
-            serviceProvider.GetService<ApplicationContext>().Database.EnsureCreated();
+            //serviceProvider.GetService<ApplicationContext>().Database.EnsureCreated();
             
             // popula a tabela Produtos com os livros.json que existe na aplicação
-            //serviceProvider.GetService<IDataService>().data.InicializaDB();
+            serviceProvider.GetService<IDataService>().InicializaDB();
         }
     }
 }
