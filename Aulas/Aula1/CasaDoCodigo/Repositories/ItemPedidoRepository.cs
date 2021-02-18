@@ -12,5 +12,16 @@ namespace CasaDoCodigo.Repositories
         public ItemPedidoRepository(ApplicationContext context) : base(context)
         {
         }
+
+        public void UpdateQuantidade(ItemPedido itemPedido)
+        {
+            var itemPedidoDB = dbSet.Where(i => i.Id == itemPedido.Id).SingleOrDefault();
+
+            if (itemPedidoDB != null)
+            {
+                itemPedidoDB.AtualizaQuantidade(itemPedido.Quantidade);
+                _context.SaveChanges();
+            }
+        }
     }
 }

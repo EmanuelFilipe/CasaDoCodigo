@@ -37,13 +37,13 @@
 					<div class="input-group">
 						<span class="input-group-btn">
 							<button class="btn btn-default">
-								<span class="glyphicon-minus"></span>
+								<span class="glyphicon-minus" onclick="carrinho.clickDecremento(this)"></span>
 							</button>
 						</span>
 						<input type="text" value="@item.Quantidade"
-							   class="form-control text-center" />
+							   class="form-control text-center" onblur="carrinho.updateQuantidade(this)" />
 						<span class="input-group-btn">
-							<button class="btn btn-default" onclick="clickIncremento(this)">
+							<button class="btn btn-default" onclick="carrinho.clickIncremento(this)">
 								<span class="glyphicon-plus"></span>
 							</button>
 						</span>
@@ -88,26 +88,5 @@
 
 @section Scripts
 {
-	<script type="text/javascript">
-		function clickIncremento(btn) {
-			//O método parents obtém os "ancestrais"(elementos acima da hierarquia) do elemento.
-			//O método find vai obter os elementos abaixo da hiearquia.
-			debugger
-			var linhaItem = $(btn).parents('[item-id]');
-			var itemId = $(linhaItem).attr('item-id');
-			var qtde = $(linhaItem).find('input').val();
-
-			var data = {
-				Id: itemId, Quantidade: qtde
-			};
-
-			$.ajax({
-				url: '@Url.Action("UpdateQuantidade", "Pedido")',
-				type: 'POST',
-				contentType: 'application/json',
-				data: JSON.stringify(data)				
-			});
-
-		}
-	</script>
+	<script src="~/js/carrinho.js"></script>
 }
