@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace CasaDoCodigo.Models
 {
+    //[DataContract]  e [DataMember] são atributos de serialização... assim podem ser convertidos quando são passados via JSON
     [DataContract]
     public class BaseModel
     {
@@ -63,15 +64,23 @@ namespace CasaDoCodigo.Models
         public string CEP { get; set; } = "";
     }
 
+    [DataContract]
     public class ItemPedido : BaseModel
     {   
         [Required]
+        [DataMember]
         public Pedido Pedido { get; private set; }
+
         [Required]
+        [DataMember]
         public Produto Produto { get; private set; }
+
         [Required]
+        [DataMember]
         public int Quantidade { get; private set; }
+
         [Required]
+        [DataMember]
         public decimal PrecoUnitario { get; private set; }
 
         public ItemPedido()
