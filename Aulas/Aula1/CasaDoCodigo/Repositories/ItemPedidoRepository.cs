@@ -13,15 +13,15 @@ namespace CasaDoCodigo.Repositories
         {
         }
 
-        public void UpdateQuantidade(ItemPedido itemPedido)
+        public ItemPedido GetItemPedido(int itemPedidoId)
         {
-            var itemPedidoDB = dbSet.Where(i => i.Id == itemPedido.Id).SingleOrDefault();
+            return dbSet.Where(i => i.Id == itemPedidoId).SingleOrDefault();
+        }
 
-            if (itemPedidoDB != null)
-            {
-                itemPedidoDB.AtualizaQuantidade(itemPedido.Quantidade);
-                _context.SaveChanges();
-            }
+        public void RemoveItemPedido(int itemPedidoId)
+        {
+            var itemPedido = GetItemPedido(itemPedidoId);
+            dbSet.Remove(itemPedido);
         }
     }
 }
