@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using CasaDoCodigo.Models;
 
-namespace CasaDoCodigo.Repositories
+namespace CasaDoCodigo.Repositories.Interfaces
 {
     public interface IProdutoRepository
     {

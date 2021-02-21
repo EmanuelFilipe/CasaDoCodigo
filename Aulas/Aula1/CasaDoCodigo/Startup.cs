@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CasaDoCodigo.Context;
 using CasaDoCodigo.Repositories;
+using CasaDoCodigo.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;

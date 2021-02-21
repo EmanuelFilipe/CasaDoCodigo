@@ -22,17 +22,22 @@ class Carrinho {
 		//O método find vai obter os elementos abaixo da hiearquia.
 		var linhaItem = $(elemento).parents('[item-id]');
 		var itemId = $(linhaItem).attr('item-id');
-		var qtde = $(linhaItem).find('input').val();
+		var novaQuantidade = $(linhaItem).find('input').val();
 
-		return { Id: itemId, Quantidade: qtde };
+		return { Id: itemId, Quantidade: novaQuantidade };
 	}
 
-    postQuantidade(data) {
+	postQuantidade(data) {
+		let token = $('[name=__RequestVerificationToken]').val();
+
+		let headers = {};
+		headers['RequestVerificationToken'] = token;
         $.ajax({
 			url: '/Pedido/UpdateQuantidade',
             type: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify(data)
+			data: JSON.stringify(data),
+			headers: headers
 		}).done(function (response) {
 			// refresh na página
 			//location.reload();
@@ -51,7 +56,7 @@ class Carrinho {
 
 			if (itemPedido.quantidade == 0)
 				linhaItem.remove();
-			
+
 		});
 	}
 

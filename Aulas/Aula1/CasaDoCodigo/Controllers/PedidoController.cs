@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CasaDoCodigo.Models;
 using CasaDoCodigo.Repositories;
+using CasaDoCodigo.Repositories.Interfaces;
 using CasaDoCodigo.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -43,16 +44,40 @@ namespace CasaDoCodigo.Controllers
 
         public IActionResult Cadastro()
         {
-            return View();
-        }
+            var pedido = _pedidoRepository.GetPedido();
 
-        public IActionResult Resumo()
-        {
-            Pedido pedido = _pedidoRepository.GetPedido();
-            return View(pedido);
+            if (pedido == null)
+                return RedirectToAction(nameof(Carrossel));
+
+            return View(pedido.Cadastro);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Cadastro(Pedido pedido)
+        {
+            if (ModelState.IsValid)
+            {
+
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Resumo(Cadastro cadastro)
+        {
+            if (ModelState.IsValid)
+            {
+                return View(_pedidoRepository.UpDateCadastro(cadastro));
+            }
+
+            return RedirectToAction(nameof(Cadastro));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public UpdateQuantidadeResponse UpdateQuantidade([FromBody]ItemPedido itemPedido)
         {
             return _pedidoRepository.UpdateQuantidade(itemPedido);

@@ -1,5 +1,6 @@
 ﻿using CasaDoCodigo.Context;
 using CasaDoCodigo.Models;
+using CasaDoCodigo.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
